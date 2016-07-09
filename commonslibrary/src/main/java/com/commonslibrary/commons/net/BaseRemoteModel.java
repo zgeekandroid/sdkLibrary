@@ -23,28 +23,20 @@ public  class BaseRemoteModel implements IRequestRemote<String> {
         
     }
     public   BaseRemoteModel(Object object){
-        if (object instanceof android.app.Fragment){
-            android.app.Fragment fragment = ( android.app.Fragment) object;
-            mContext = fragment .getActivity();
-            
-        }else
-//        
-//        if (object instanceof android.support.v4.app.Fragment){
-//            android.app.Fragment fragment = (Fragment) object;
-//            mContext = fragment .getActivity();
-//        }else
         
-        if (object instanceof Activity){
-            mContext = (Activity)object;
-        }else
+            if (object instanceof android.app.Fragment) {
+                android.app.Fragment fragment = (android.app.Fragment) object;
+                mContext = fragment.getActivity();
+
+            } else if (object instanceof android.support.v4.app.Fragment) {
+                android.support.v4.app.Fragment fragment = (android.support.v4.app.Fragment) object;
+                mContext = fragment.getActivity();
+            } else if (object instanceof Activity) {
+                mContext = (Activity) object;
+            } else if (object instanceof Application) {
+                mContext = ((Application) object).getApplicationContext();
+            } 
         
-        if (object instanceof Application){
-            mContext = ((Application) object) .getApplicationContext(); 
-        }else
-        
-        if (object instanceof FragmentActivity){
-            mContext = ((FragmentActivity) object).getApplicationContext();
-        }
     }
 
     public  Map<String, Object> getExtraParameter(){
